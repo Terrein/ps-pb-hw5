@@ -26,7 +26,7 @@ class Base():
 # атрибуты caloric,cost 
 class Product(Base):
     def __init__(self, title, caloric, cost):
-        if Product.check_caloric(caloric) and Product.check_cost(cost):
+        if Product.check_object(caloric) and Product.check_object(cost):
             self.__caloric = caloric
             self.__cost = cost
             super().__init__(title)
@@ -37,13 +37,11 @@ class Product(Base):
         return f'Продукт {self.title} колорийность на 100 гр. {self.__caloric} kkal стоимость за 100 гр. {self.__cost} руб.'
 
     @staticmethod
-    def check_caloric(caloric):
-        return caloric > 0
-
-    @staticmethod
-    def check_cost(cost):
-        return cost > 0
-
+    def check_object(object):
+        return object > 0
+    
+    
+   
     @property
     def caloric(self):
         return self.__caloric
@@ -54,14 +52,14 @@ class Product(Base):
 
     @caloric.setter
     def caloric(self, caloric):
-        if Product.check_caloric(caloric):
+        if Product.check_object(caloric):
             self.__caloric = caloric
         else:
             raise ValueError
 
     @cost.setter
     def cost(self, cost):
-        if Product.check_cost(cost):
+        if Product.check_object(cost):
             self.__cost = cost
         else:
             raise ValueError
@@ -120,18 +118,19 @@ class Pizza(Base):
         total_cost = 0
         for ingredient in self.ingredients:
             product_cost = ingredient.get_cost_price()
-            total_cost = product_cost + total_cost
+            total_cost += product_cost
         return  total_cost
 
     def get_kkal(self):
         total_kkal = 0
         for ingredient in self.ingredients:
             product_kkal = ingredient.get_kkal()
-            total_kkal = product_kkal + total_kkal
+            total_kkal += product_kkal 
         return  total_kkal    
-    
 
-dough_product = Product('Тесто', 200, 20)
+   
+
+dough_product = Product('Тесто',-10, 20)
 tomato_product = Product('Помидор', 100, 50)
 cheese_product = Product('Сыр', 100, 120)
 dough_ingredient = Ingredient(dough_product, 100)
@@ -139,3 +138,5 @@ tomato_ingredient = Ingredient(tomato_product, 100)
 cheese_ingredient = Ingredient(cheese_product, 100)
 pizza_margarita = Pizza('Маргарита', [dough_ingredient, tomato_ingredient, cheese_ingredient])
 print(pizza_margarita)
+
+    

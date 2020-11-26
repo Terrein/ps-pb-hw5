@@ -130,7 +130,7 @@ class Pizza(Base):
 
    
 
-dough_product = Product('Тесто',-10, 20)
+dough_product = Product('Тесто',200, 20)
 tomato_product = Product('Помидор', 100, 50)
 cheese_product = Product('Сыр', 100, 120)
 dough_ingredient = Ingredient(dough_product, 100)

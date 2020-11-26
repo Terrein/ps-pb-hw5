@@ -40,8 +40,6 @@ class Product(Base):
     def check_object(object):
         return object > 0
     
-    
-   
     @property
     def caloric(self):
         return self.__caloric
